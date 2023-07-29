@@ -20,9 +20,9 @@ class NetworkService {
     let baseURL = "https://reelgood-bff.vercel.app/api/assessment/"
     
     func fetchMediaItems(ofKind contentKind: ContentKind, page: Int = 1) -> AnyPublisher<MediaItems, NetworkError> {
-        guard let url = URL(string: "\(baseURL)browse/\(contentKind.rawValue)?page=\(page)") else {
+        guard let url = URL(string: "\(baseURL)browse/\(contentKind.rawValue)s?page=\(page)") else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
-        }
+        }        
         return Future { promise in
             Task {
                 do {

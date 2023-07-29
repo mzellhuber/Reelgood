@@ -57,7 +57,6 @@ class MediaListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - UITableViewDataSource
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.mediaItems.count
     }
@@ -70,7 +69,6 @@ class MediaListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - UITableViewDelegate
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Present the detail view for the selected media item
     }
