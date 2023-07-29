@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2FCB07592A74993200999424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07582A74993200999424 /* AppDelegate.swift */; };
 		2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB075A2A74993200999424 /* SceneDelegate.swift */; };
-		2FCB075D2A74993200999424 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB075C2A74993200999424 /* ViewController.swift */; };
 		2FCB07602A74993200999424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB075E2A74993200999424 /* Main.storyboard */; };
 		2FCB07622A74993500999424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB07612A74993500999424 /* Assets.xcassets */; };
 		2FCB07652A74993500999424 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB07632A74993500999424 /* LaunchScreen.storyboard */; };
@@ -17,13 +16,13 @@
 		2FCB07702A749B3D00999424 /* MediaItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB076F2A749B3D00999424 /* MediaItemDetails.swift */; };
 		2FCB07732A74C31900999424 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07722A74C31900999424 /* NetworkService.swift */; };
 		2FCB07762A74C7CB00999424 /* MediaListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07752A74C7CB00999424 /* MediaListViewModel.swift */; };
+		2FCB07792A74C9C800999424 /* MediaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07782A74C9C800999424 /* MediaListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FCB07552A74993200999424 /* Reelgood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reelgood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCB07582A74993200999424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCB075A2A74993200999424 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2FCB075C2A74993200999424 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2FCB075F2A74993200999424 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FCB07612A74993500999424 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FCB07642A74993500999424 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,6 +31,7 @@
 		2FCB076F2A749B3D00999424 /* MediaItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemDetails.swift; sourceTree = "<group>"; };
 		2FCB07722A74C31900999424 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2FCB07752A74C7CB00999424 /* MediaListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListViewModel.swift; sourceTree = "<group>"; };
+		2FCB07782A74C9C800999424 /* MediaListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +64,12 @@
 		2FCB07572A74993200999424 /* Reelgood */ = {
 			isa = PBXGroup;
 			children = (
+				2FCB07772A74C9B800999424 /* View */,
 				2FCB07742A74C7BA00999424 /* ViewModel */,
 				2FCB07712A74C30D00999424 /* Service */,
 				2FCB076C2A74998400999424 /* Model */,
 				2FCB07582A74993200999424 /* AppDelegate.swift */,
 				2FCB075A2A74993200999424 /* SceneDelegate.swift */,
-				2FCB075C2A74993200999424 /* ViewController.swift */,
 				2FCB075E2A74993200999424 /* Main.storyboard */,
 				2FCB07612A74993500999424 /* Assets.xcassets */,
 				2FCB07632A74993500999424 /* LaunchScreen.storyboard */,
@@ -101,6 +101,14 @@
 				2FCB07752A74C7CB00999424 /* MediaListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2FCB07772A74C9B800999424 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2FCB07782A74C9C800999424 /* MediaListViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,9 +182,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FCB075D2A74993200999424 /* ViewController.swift in Sources */,
 				2FCB076E2A74999100999424 /* MediaItem.swift in Sources */,
 				2FCB07702A749B3D00999424 /* MediaItemDetails.swift in Sources */,
+				2FCB07792A74C9C800999424 /* MediaListViewController.swift in Sources */,
 				2FCB07592A74993200999424 /* AppDelegate.swift in Sources */,
 				2FCB07732A74C31900999424 /* NetworkService.swift in Sources */,
 				2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */,
@@ -337,9 +345,8 @@
 				INFOPLIST_FILE = Reelgood/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,9 +372,8 @@
 				INFOPLIST_FILE = Reelgood/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
