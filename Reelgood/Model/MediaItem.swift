@@ -15,6 +15,7 @@ struct MediaItem: Codable {
     let imdb: String
     let contentKind: ContentKind
     let poster: String
+    var details: MediaItemDetails?
 
     enum CodingKeys: String, CodingKey {
         case title, year, ids, id, imdb
