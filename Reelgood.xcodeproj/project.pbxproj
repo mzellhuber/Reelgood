@@ -15,6 +15,7 @@
 		2FCB07652A74993500999424 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB07632A74993500999424 /* LaunchScreen.storyboard */; };
 		2FCB076E2A74999100999424 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB076D2A74999100999424 /* MediaItem.swift */; };
 		2FCB07702A749B3D00999424 /* MediaItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB076F2A749B3D00999424 /* MediaItemDetails.swift */; };
+		2FCB07732A74C31900999424 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07722A74C31900999424 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2FCB07662A74993500999424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCB076D2A74999100999424 /* MediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		2FCB076F2A749B3D00999424 /* MediaItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemDetails.swift; sourceTree = "<group>"; };
+		2FCB07722A74C31900999424 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		2FCB07572A74993200999424 /* Reelgood */ = {
 			isa = PBXGroup;
 			children = (
+				2FCB07712A74C30D00999424 /* Service */,
 				2FCB076C2A74998400999424 /* Model */,
 				2FCB07582A74993200999424 /* AppDelegate.swift */,
 				2FCB075A2A74993200999424 /* SceneDelegate.swift */,
@@ -79,6 +82,14 @@
 				2FCB076F2A749B3D00999424 /* MediaItemDetails.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2FCB07712A74C30D00999424 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2FCB07722A74C31900999424 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +167,7 @@
 				2FCB076E2A74999100999424 /* MediaItem.swift in Sources */,
 				2FCB07702A749B3D00999424 /* MediaItemDetails.swift in Sources */,
 				2FCB07592A74993200999424 /* AppDelegate.swift in Sources */,
+				2FCB07732A74C31900999424 /* NetworkService.swift in Sources */,
 				2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
