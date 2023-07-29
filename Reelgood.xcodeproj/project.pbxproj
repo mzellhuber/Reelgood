@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F95077F2A757D1B00EFF5E0 /* MediaItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95077E2A757D1B00EFF5E0 /* MediaItemCell.swift */; };
+		2F9507822A7582E300EFF5E0 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9507812A7582E300EFF5E0 /* UIColor+Hex.swift */; };
 		2FCB07592A74993200999424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07582A74993200999424 /* AppDelegate.swift */; };
 		2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB075A2A74993200999424 /* SceneDelegate.swift */; };
 		2FCB07602A74993200999424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB075E2A74993200999424 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		2F95077E2A757D1B00EFF5E0 /* MediaItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItemCell.swift; sourceTree = "<group>"; };
+		2F9507812A7582E300EFF5E0 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		2FCB07552A74993200999424 /* Reelgood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reelgood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCB07582A74993200999424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCB075A2A74993200999424 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F9507802A7582B800EFF5E0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2F9507812A7582E300EFF5E0 /* UIColor+Hex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2FCB074C2A74993200999424 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 		2FCB07572A74993200999424 /* Reelgood */ = {
 			isa = PBXGroup;
 			children = (
+				2F9507802A7582B800EFF5E0 /* Extensions */,
 				2FCB07772A74C9B800999424 /* View */,
 				2FCB07742A74C7BA00999424 /* ViewModel */,
 				2FCB07712A74C30D00999424 /* Service */,
@@ -188,6 +199,7 @@
 				2FCB076E2A74999100999424 /* MediaItem.swift in Sources */,
 				2FCB07702A749B3D00999424 /* MediaItemDetails.swift in Sources */,
 				2FCB07792A74C9C800999424 /* MediaListViewController.swift in Sources */,
+				2F9507822A7582E300EFF5E0 /* UIColor+Hex.swift in Sources */,
 				2FCB07592A74993200999424 /* AppDelegate.swift in Sources */,
 				2FCB07732A74C31900999424 /* NetworkService.swift in Sources */,
 				2F95077F2A757D1B00EFF5E0 /* MediaItemCell.swift in Sources */,
