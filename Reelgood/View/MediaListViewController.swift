@@ -8,12 +8,12 @@
 import UIKit
 import Combine
 
-class MediaListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    private var tableView: UITableView!
+class MediaListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    private var collectionView: UICollectionView!
     private var viewModel: MediaListViewModel
     private var cancellables = Set<AnyCancellable>()
 
-    init(viewModel: MediaListViewModel = MediaListViewModel()) {
+    init(viewModel: MediaListViewModel = MediaListViewModel(contentKind: .movie)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -24,52 +24,33 @@ class MediaListViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        bindViewModel()
-        viewModel.fetchMediaItems(ofKind: .movie)
-    }
-    
-    private func setupTableView() {
-        tableView = UITableView(frame: view.bounds)
-        tableView.dataSource = self
-        tableView.delegate = self
-        view.addSubview(tableView)
-    }
-    
-    private func bindViewModel() {
+
+        let layout = UICollectionViewFlowLayout()
+        // TODO: Configure the layout for a grid
+
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MediaItemCell.self, forCellWithReuseIdentifier: MediaItemCell.reuseIdentifier)
+
+        view.addSubview(collectionView)
+
         viewModel.$mediaItems
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.tableView.reloadData()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.$error
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] error in
-                if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self?.present(alert, animated: true)
-                }
+                self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
     }
-    
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    // MARK: - UICollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.mediaItems.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaItemCell.reuseIdentifier, for: indexPath) as! MediaItemCell
         let mediaItem = viewModel.mediaItems[indexPath.row]
-        cell.textLabel?.text = mediaItem.title
+        cell.title = mediaItem.title
         return cell
-    }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Present the detail view for the selected media item
     }
 }

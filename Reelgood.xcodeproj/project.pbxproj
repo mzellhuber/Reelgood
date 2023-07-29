@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F95077F2A757D1B00EFF5E0 /* MediaItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F95077E2A757D1B00EFF5E0 /* MediaItemCell.swift */; };
 		2FCB07592A74993200999424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB07582A74993200999424 /* AppDelegate.swift */; };
 		2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB075A2A74993200999424 /* SceneDelegate.swift */; };
 		2FCB07602A74993200999424 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCB075E2A74993200999424 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F95077E2A757D1B00EFF5E0 /* MediaItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItemCell.swift; sourceTree = "<group>"; };
 		2FCB07552A74993200999424 /* Reelgood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reelgood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCB07582A74993200999424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCB075A2A74993200999424 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		2FCB07772A74C9B800999424 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2F95077E2A757D1B00EFF5E0 /* MediaItemCell.swift */,
 				2FCB07782A74C9C800999424 /* MediaListViewController.swift */,
 			);
 			path = View;
@@ -187,6 +190,7 @@
 				2FCB07792A74C9C800999424 /* MediaListViewController.swift in Sources */,
 				2FCB07592A74993200999424 /* AppDelegate.swift in Sources */,
 				2FCB07732A74C31900999424 /* NetworkService.swift in Sources */,
+				2F95077F2A757D1B00EFF5E0 /* MediaItemCell.swift in Sources */,
 				2FCB075B2A74993200999424 /* SceneDelegate.swift in Sources */,
 				2FCB07762A74C7CB00999424 /* MediaListViewModel.swift in Sources */,
 			);

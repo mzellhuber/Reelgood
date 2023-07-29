@@ -22,7 +22,7 @@ class NetworkService {
     func fetchMediaItems(ofKind contentKind: ContentKind, page: Int = 1) -> AnyPublisher<MediaItems, NetworkError> {
         guard let url = URL(string: "\(baseURL)browse/\(contentKind.rawValue)s?page=\(page)") else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
-        }        
+        }
         return Future { promise in
             Task {
                 do {
