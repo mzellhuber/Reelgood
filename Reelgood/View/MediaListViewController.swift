@@ -26,6 +26,8 @@ class MediaListViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
+    private let imageCache = NSCache<NSString, UIImage>()
+    
     init(viewModel: MediaListViewModel = MediaListViewModel(contentKind: .movie)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -204,12 +206,12 @@ extension MediaListViewController: UICollectionViewDelegate {
 
 extension MediaListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-            let availableWidth = view.frame.width - paddingSpace
-            let widthPerItem = availableWidth / itemsPerRow
-
-            return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
-        }
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
@@ -222,13 +224,24 @@ extension MediaListViewController: UICollectionViewDelegateFlowLayout {
 
 extension MediaListViewController {
     private func loadImage(from url: String) async -> UIImage? {
-        guard let url = URL(string: url) else {
+        // Check if the image is already in the cache
+        if let cachedImage = imageCache.object(forKey: url as NSString) {
+            return cachedImage
+        }
+        
+        guard let imageURL = URL(string: url) else {
             return nil
         }
         
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            return UIImage(data: data)
+            let (data, _) = try await URLSession.shared.data(from: imageURL)
+            if let image = UIImage(data: data) {
+                // If the image was successfully created, cache it
+                imageCache.setObject(image, forKey: url as NSString)
+                return image
+            } else {
+                return nil
+            }
         } catch {
             print("Failed to load image: \(error)")
             return nil
