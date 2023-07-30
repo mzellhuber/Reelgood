@@ -110,6 +110,7 @@ class MediaListViewController: UIViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
         collectionView.register(MediaItemCell.self, forCellWithReuseIdentifier: "MediaItemCell")
         collectionView.backgroundColor = UIColor(hex: backgroundColorHex)
         view.addSubview(collectionView)
@@ -140,10 +141,14 @@ class MediaListViewController: UIViewController {
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         let contentKind: ContentKind = sender.selectedSegmentIndex == 0 ? .movie : .show
-        viewModel.fetchMediaItems(ofKind: contentKind)
+        viewModel = MediaListViewModel(contentKind: contentKind)
+        setupViewModelBinding()
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.updateUnderlinePosition()
         }
+        
+        // Scroll to the top of the collection view
+        collectionView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     private func updateUnderlinePosition() {
@@ -227,6 +232,17 @@ extension MediaListViewController {
         } catch {
             print("Failed to load image: \(error)")
             return nil
+        }
+    }
+}
+
+extension MediaListViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            // If you're prefetching the last item, fetch the next page of items.
+            if indexPath.row == viewModel.mediaItems.count - 1 {
+                viewModel.fetchNextPage()
+            }
         }
     }
 }
