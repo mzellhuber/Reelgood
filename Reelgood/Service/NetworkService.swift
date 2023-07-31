@@ -39,15 +39,15 @@ class NetworkService {
         }.eraseToAnyPublisher()
     }
 
-    func fetchMediaItemDetails(ofKind contentKind: ContentKind, id: Int) -> AnyPublisher<MediaItem, NetworkError> {
-        guard let url = URL(string: "\(baseURL)details/\(contentKind.rawValue)/\(id)") else {
+    func fetchMediaItemDetails(ofKind contentKind: ContentKind, id: Int) -> AnyPublisher<MediaItemDetails, NetworkError> {
+        guard let url = URL(string: "\(baseURL)details/\(contentKind.rawValue)s/\(id)") else {
             return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
         }
         return Future { promise in
             Task {
                 do {
-                    let mediaItem: MediaItem = try await self.request(url: url)
-                    promise(.success(mediaItem))
+                    let mediaItemDetails: MediaItemDetails = try await self.request(url: url)
+                    promise(.success(mediaItemDetails))
                 } catch {
                     if let networkError = error as? NetworkError {
                         promise(.failure(networkError))

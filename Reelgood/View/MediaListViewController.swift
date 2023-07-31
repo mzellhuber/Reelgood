@@ -28,6 +28,9 @@ class MediaListViewController: UIViewController {
     
     private let imageCache = NSCache<NSString, UIImage>()
     
+    private var contentKind: ContentKind = .movie
+    private let imageLoader = ImageLoader()
+    
     init(viewModel: MediaListViewModel = MediaListViewModel(contentKind: .movie)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -135,14 +138,13 @@ class MediaListViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateUnderlinePosition()
     }
     
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        let contentKind: ContentKind = sender.selectedSegmentIndex == 0 ? .movie : .show
+        contentKind = sender.selectedSegmentIndex == 0 ? .movie : .show
         viewModel = MediaListViewModel(contentKind: contentKind)
         setupViewModelBinding()
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -188,20 +190,60 @@ extension MediaListViewController: UICollectionViewDataSource {
         let mediaItem = viewModel.mediaItems[indexPath.row]
         cell.title = mediaItem.title
         cell.year = mediaItem.year
+        cell.posterImageView.image = nil
         Task {
-            if let image = await loadImage(from: mediaItem.poster) {
+            if let image = await imageLoader.loadImage(from: mediaItem.poster) {
                 DispatchQueue.main.async {
                     cell.posterImageView.image = image
                 }
             }
         }
+        
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension MediaListViewController: UICollectionViewDelegate {
-    // Implement UICollectionViewDelegate methods here if needed
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mediaItem = viewModel.mediaItems[indexPath.row]
+        
+        // Fetch media item details using the view model
+        viewModel.fetchMediaItemDetails(ofKind: contentKind, id: mediaItem.id)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    // Handle the error and show an alert to the user
+                    DispatchQueue.main.async {
+                        self?.handleError(error)
+                    }
+                case .finished:
+                    break // No need to handle success here
+                }
+            }, receiveValue: { [weak self] mediaItemDetails in
+                DispatchQueue.main.async {
+                    // Create and present the modal popup with media item details
+                    let detailsViewController = MediaDetailsViewController()
+                    
+                    // Create a new instance of MediaDetailsViewModel and set the mediaItemDetails
+                    let detailsViewModel = MediaDetailsViewModel(mediaItem: mediaItemDetails)
+                    detailsViewController.viewModel = detailsViewModel
+                    
+                    let navigationController = UINavigationController(rootViewController: detailsViewController)
+                    navigationController.modalPresentationStyle = .formSheet
+                    self?.present(navigationController, animated: true, completion: nil)
+                }
+            })
+            .store(in: &cancellables)
+    }
+    
+    private func handleError(_ error: NetworkError) {
+        // Create and show an alert to the user with the error message
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension MediaListViewController: UICollectionViewDelegateFlowLayout {
@@ -219,33 +261,6 @@ extension MediaListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
-    }
-}
-
-extension MediaListViewController {
-    private func loadImage(from url: String) async -> UIImage? {
-        // Check if the image is already in the cache
-        if let cachedImage = imageCache.object(forKey: url as NSString) {
-            return cachedImage
-        }
-        
-        guard let imageURL = URL(string: url) else {
-            return nil
-        }
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: imageURL)
-            if let image = UIImage(data: data) {
-                // If the image was successfully created, cache it
-                imageCache.setObject(image, forKey: url as NSString)
-                return image
-            } else {
-                return nil
-            }
-        } catch {
-            print("Failed to load image: \(error)")
-            return nil
-        }
     }
 }
 

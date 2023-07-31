@@ -16,10 +16,10 @@ class MediaListViewModel {
     // Outputs that the view controller can subscribe to
     @Published var mediaItems: [MediaItem] = []
     @Published var error: NetworkError?
-
+    
     private var currentPage = 1
     private var isFetching = false
-
+    
     init(contentKind: ContentKind, networkService: NetworkService = NetworkService()) {
         self.contentKind = contentKind
         self.networkService = networkService
@@ -51,5 +51,9 @@ class MediaListViewModel {
         guard !isFetching else { return }
         currentPage += 1
         fetchMediaItems(ofKind: contentKind, page: currentPage)
+    }
+    
+    func fetchMediaItemDetails(ofKind contentKind: ContentKind, id: Int) -> AnyPublisher<MediaItemDetails, NetworkError> {
+        networkService.fetchMediaItemDetails(ofKind: contentKind, id: id)
     }
 }
